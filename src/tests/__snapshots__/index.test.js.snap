@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`namespace-styled-components namespaces a style block with &&: namespaces a style block with && 1`] = `
+"
+import styled from 'styled-components';
+
+export default styled.input\`
+  && {
+    border: \${props => props.borderWidth} solid \${props => props.borderColor};
+  }
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+export default styled.input\`.namespace && {
+    border: \${props => props.borderWidth} solid \${props => props.borderColor};
+  }\`;
+"
+`;
+
+exports[`namespace-styled-components namespaces a style block with a sibling selector: namespaces a style block with a sibling selector 1`] = `
+"
+import styled from 'styled-components';
+
+export default styled.button\`
+  padding: \${props => props.padding};
+
+  & + & {
+    margin-left: \${props => props.spaceBetween};
+  }
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+export default styled.button\`.namespace & { 
+  padding: \${props => props.padding};
+ }
+
+  .namespace & + & {
+    margin-left: \${props => props.spaceBetween};
+  }\`;
+"
+`;
+
+exports[`namespace-styled-components namespaces a style block with interpolated selectors: namespaces a style block with interpolated selectors 1`] = `
+"
+import styled from 'styled-components';
+
+const Child = styled.span;
+
+export default styled.div\`
+  position: relative;
+
+  \${Child} {
+    \${props => props.childStyles};
+  }
+
+  \${Child} + &,
+  & + \${Child} {
+    margin-right: \${props => props.spaceBetween};
+  }
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+const Child = styled.span;
+
+export default styled.div\`.namespace & { 
+  position: relative;
+ }
+
+  .namespace & \${Child} {
+    \${props => props.childStyles};
+  }
+
+  .namespace \${Child} + &,
+  .namespace & + \${Child} {
+    margin-right: \${props => props.spaceBetween};
+  }\`;
+"
+`;
+
+exports[`namespace-styled-components namespaces a style block with no selectors: namespaces a style block with no selectors 1`] = `
+"
+import styled from 'styled-components';
+
+export default styled.div\`
+  background-color: \${props => props.backgroundColor};
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+export default styled.div\`.namespace & { 
+  background-color: \${props => props.backgroundColor};
+ }\`;
+"
+`;
