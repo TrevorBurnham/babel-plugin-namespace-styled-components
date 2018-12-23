@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`styled-components output for a style block with && 1`] = `
+.namespace .c0.c0 {
+  border: 1px solid fuchsia;
+}
+
+<input
+  className="c0"
+/>
+`;
+
+exports[`styled-components output for a style block with a sibling selector 1`] = `
+.namespace .c1 {
+  padding: 4px;
+}
+
+.namespace .c1 + .c0 {
+  margin-left: 8px;
+}
+
+<button
+  className="c0 c1"
+/>
+`;
+
+exports[`styled-components output for a style block with interpolated selectors 1`] = `
+.namespace .c0 {
+  position: relative;
+}
+
+.namespace .c0 .c1 {
+  -webkit-transform: scale(90%);
+  -ms-transform: scale(90%);
+  transform: scale(90%);
+}
+
+.namespace .c2 + .c0,
+.namespace .c0 + .sc-dnqmqq {
+  margin-right: 12px;
+}
+
+<div
+  className="c0"
+/>
+`;
+
+exports[`styled-components output for a style block with no selectors 1`] = `
+.namespace .c0 {
+  background-color: #333;
+}
+
+<div
+  className="c0"
+/>
+`;
