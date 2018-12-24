@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-namespace-styled-components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "files": [
     "lib"
@@ -10,7 +10,7 @@
   "repository": "https://github.com/trevorburnham/babel-plugin-namespace-styled-components/",
   "license": "MIT",
   "scripts": {
-    "build": "babel src/*.js -d lib",
+    "build": "babel src -d lib --ignore src/tests",
     "clean": "rimraf lib",
     "prepublish": "npm run clean && npm run build",
     "test": "jest"
