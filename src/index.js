@@ -50,8 +50,12 @@ const taggedTemplateVisitor = (path, state) => {
     })
     .then(asyncResult => {
       postcssNestedResult = asyncResult;
+    })
+    .catch(err => {
+      postcssNestedResult = err;
     });
   loopWhile(() => postcssNestedResult == null);
+  if (postcssNestedResult instanceof Error) throw postcssNestedResult;
 
   // Run the string through our namespace plugin to prefix each selector with the given namespace
   let postcssNamespaceResult;
@@ -63,8 +67,12 @@ const taggedTemplateVisitor = (path, state) => {
     )
     .then(asyncResult => {
       postcssNamespaceResult = asyncResult;
+    })
+    .catch(err => {
+      postcssNestedResult = err;
     });
   loopWhile(() => postcssNamespaceResult == null);
+  if (postcssNestedResult instanceof Error) throw postcssNestedResult;
 
   // Replace the expression placeholders to form a new, properly namespaced tagged template
   const processedString = postcssNamespaceResult.css;

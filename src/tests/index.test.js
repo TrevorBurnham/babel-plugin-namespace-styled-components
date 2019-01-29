@@ -46,5 +46,12 @@ pluginTester({
       snapshot: false,
       error: /option `namespace` must be provided/,
     },
+
+    {
+      title: 'throws an error if the styles can’t be parsed',
+      fixture: path.join(__dirname, 'fixtures/malformatted.js'),
+      snapshot: false,
+      error: /Unexpected '\/'/,
+    },
   ],
 });
