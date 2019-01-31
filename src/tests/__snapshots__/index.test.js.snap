@@ -46,6 +46,44 @@ export default styled.button\`.namespace & {
 "
 `;
 
+exports[`namespace-styled-components namespaces a style block with interpolated mixins: namespaces a style block with interpolated mixins 1`] = `
+"
+import styled, { css } from 'styled-components';
+
+const displayBlockMixin = css\`
+  display: block;
+\`;
+
+export default styled.div\`
+  \${displayBlockMixin}
+
+  position: relative;
+
+  &:hover {
+    opacity: 1;
+  }
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled, { css } from 'styled-components';
+
+const displayBlockMixin = css\`
+  display: block;
+\`;
+
+export default styled.div\`.namespace & { 
+  \${displayBlockMixin}
+
+  position: relative;
+ }
+
+  .namespace &:hover {
+    opacity: 1;
+  }\`;
+"
+`;
+
 exports[`namespace-styled-components namespaces a style block with interpolated selectors: namespaces a style block with interpolated selectors 1`] = `
 "
 import styled from 'styled-components';

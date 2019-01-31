@@ -24,6 +24,21 @@ exports[`styled-components output for a style block with a sibling selector 1`] 
 />
 `;
 
+exports[`styled-components output for a style block with interpolated mixins 1`] = `
+.namespace .c0 {
+  display: block;
+  position: relative;
+}
+
+.namespace .c0:hover {
+  opacity: 1;
+}
+
+<div
+  className="c0"
+/>
+`;
+
 exports[`styled-components output for a style block with interpolated selectors 1`] = `
 .namespace .c0 {
   position: relative;

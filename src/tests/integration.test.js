@@ -56,4 +56,11 @@ describe('styled-components output', () => {
         .toJSON()
     ).toMatchSnapshot();
   });
+
+  test('for a style block with interpolated mixins', () => {
+    const Menu = evalFixture(
+      path.join(__dirname, 'fixtures/interpolatedMixin.js')
+    );
+    expect(renderer.create(<Menu />).toJSON()).toMatchSnapshot();
+  });
 });

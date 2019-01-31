@@ -32,6 +32,11 @@ pluginTester({
     },
 
     {
+      title: 'namespaces a style block with interpolated mixins',
+      fixture: path.join(__dirname, 'fixtures/interpolatedMixin.js'),
+    },
+
+    {
       title: 'does not namespace style blocks in helpers',
       fixture: path.join(__dirname, 'fixtures/helpers.js'),
       snapshot: false,
