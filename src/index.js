@@ -57,6 +57,9 @@ const taggedTemplateVisitor = (path, state) => {
   loopWhile(() => postcssNestedResult == null);
   if (postcssNestedResult instanceof Error) throw postcssNestedResult;
 
+  // Fix for reported bug where postcss-nested emits malformed CSS after each closing "}"
+  postcssNestedResult.css = postcssNestedResult.css.replace(/}\S+/g, '}');
+
   // Run the string through our namespace plugin to prefix each selector with the given namespace
   let postcssNamespaceResult;
   postcssNamespace
