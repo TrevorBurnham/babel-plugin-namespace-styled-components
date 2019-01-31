@@ -69,10 +69,10 @@ const taggedTemplateVisitor = (path, state) => {
       postcssNamespaceResult = asyncResult;
     })
     .catch(err => {
-      postcssNestedResult = err;
+      postcssNamespaceResult = err;
     });
   loopWhile(() => postcssNamespaceResult == null);
-  if (postcssNestedResult instanceof Error) throw postcssNestedResult;
+  if (postcssNamespaceResult instanceof Error) throw postcssNamespaceResult;
 
   // Replace the expression placeholders to form a new, properly namespaced tagged template
   const processedString = postcssNamespaceResult.css;
