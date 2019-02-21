@@ -113,11 +113,15 @@ export default styled.div\`.namespace & {
   position: relative;
  }
 
-  .namespace & \${Child} {
+  \${Child}
+
+  .namespace & {
     \${props => props.childStyles};
   }
 
-  .namespace \${Child} + &,
+  \${Child}
+
+  .namespace + &,
   .namespace & + \${Child} {
     margin-right: \${props => props.spaceBetween};
   }\`;

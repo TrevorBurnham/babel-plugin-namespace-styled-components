@@ -9,8 +9,8 @@ import {
 } from 'babel-plugin-styled-components/lib/utils/detectors';
 import postcssNamespace from './postcssNamespace';
 
-const PLACEHOLDER_PREFIX = 'EXPRESSION_PLACEHOLDER_';
-const PLACEHOLDER_PATTERN = /EXPRESSION_PLACEHOLDER_(\d+)/g;
+const makePlaceholder = index => `/* EXPRESSION_PLACEHOLDER_${index} */`;
+const PLACEHOLDER_PATTERN = /\/\* EXPRESSION_PLACEHOLDER_(\d+) \*\//g;
 
 const replacementNodes = new WeakSet();
 
@@ -35,9 +35,7 @@ const taggedTemplateVisitor = (path, state) => {
   // Convert the tagged template to a string, with ${} expressions replaced with placeholders
   const originalStyleString = quasis
     .map((quasi, i) =>
-      expressions[i]
-        ? quasi.value.raw + PLACEHOLDER_PREFIX + i
-        : quasi.value.raw
+      expressions[i] ? quasi.value.raw + makePlaceholder(i) : quasi.value.raw
     )
     .join('');
 
