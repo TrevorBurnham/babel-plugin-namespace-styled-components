@@ -37,6 +37,11 @@ pluginTester({
     },
 
     {
+      title: 'namespaces a style block with interpolations before and after a declaration',
+      fixture: path.join(__dirname, 'fixtures/interpolationSandwich.js'),
+    },
+
+    {
       title: 'does not namespace style blocks in helpers',
       fixture: path.join(__dirname, 'fixtures/helpers.js'),
       snapshot: false,

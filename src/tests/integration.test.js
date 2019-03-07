@@ -63,4 +63,11 @@ describe('styled-components output', () => {
     );
     expect(renderer.create(<Menu />).toJSON()).toMatchSnapshot();
   });
+
+  test('for a style block with interpolations before and afer a selector', () => {
+    const Span = evalFixture(
+      path.join(__dirname, 'fixtures/interpolationSandwich.js')
+    );
+    expect(renderer.create(<Span />).toJSON()).toMatchSnapshot();
+  });
 });
