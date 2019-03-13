@@ -10,7 +10,9 @@ import {
 import postcssNamespace from './postcssNamespace';
 
 const makePlaceholder = index => `/* EXPRESSION_PLACEHOLDER_${index} */`;
-const PLACEHOLDER_PATTERN = /\/\* EXPRESSION_PLACEHOLDER_(\d+) \*\//g;
+const makePlaceholderIdentifier = index => `/* EXPRESSION_PLACEHOLDER_${index}_Identifier */`;
+// matches BOTH patterns so we don't need to change how we store values
+const PLACEHOLDER_PATTERN = /\/\* EXPRESSION_PLACEHOLDER_(\d+)(?:_Identifier)? \*\//g;
 
 const replacementNodes = new WeakSet();
 
@@ -34,8 +36,20 @@ const taggedTemplateVisitor = (path, state) => {
 
   // Convert the tagged template to a string, with ${} expressions replaced with placeholders
   const originalStyleString = quasis
-    .map((quasi, i) =>
-      expressions[i] ? quasi.value.raw + makePlaceholder(i) : quasi.value.raw
+    .map((quasi, i) => {
+      // is the interpolation NOT an Identifier (i.e. is it most likely not an interpolated Selector?)
+      if (expressions[i] && expressions[i].type !== 'Identifier') {
+        return quasi.value.raw + makePlaceholder(i);
+      } 
+      // we think it's an interpolated Selector (could catch mixins that aren't arrow functions)
+      else if (expressions[i] && expressions[i].type) {
+        return quasi.value.raw + makePlaceholderIdentifier(i);
+      }
+      // otherwise just 
+      else {
+        return quasi.value.raw;
+      }
+    }
     )
     .join('');
 
