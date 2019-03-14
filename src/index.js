@@ -1,5 +1,4 @@
 import postcssNested from 'postcss-nested';
-import postcssSafeParser from 'postcss-safe-parser';
 import { loopWhile } from 'deasync';
 import * as t from 'babel-types';
 import {
@@ -7,10 +6,11 @@ import {
   isPureHelper,
   isInjectGlobalHelper,
 } from 'babel-plugin-styled-components/lib/utils/detectors';
+import postcssSafeParser from './placeholderSafeParser';
 import postcssNamespace from './postcssNamespace';
 
-const makePlaceholder = index => `/* EXPRESSION_PLACEHOLDER_${index} */`;
-const PLACEHOLDER_PATTERN = /\/\* EXPRESSION_PLACEHOLDER_(\d+) \*\//g;
+const makePlaceholder = index => `EXPRESSION_PLACEHOLDER_${index}`;
+const PLACEHOLDER_PATTERN = /EXPRESSION_PLACEHOLDER_(\d+)/g;
 
 const replacementNodes = new WeakSet();
 

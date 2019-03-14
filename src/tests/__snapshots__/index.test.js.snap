@@ -113,15 +113,11 @@ export default styled.div\`.namespace & {
   position: relative;
  }
 
-  \${Child}
-
-  .namespace & {
+  .namespace & \${Child} {
     \${props => props.childStyles};
   }
 
-  \${Child}
-
-  .namespace + &,
+  .namespace \${Child} + &,
   .namespace & + \${Child} {
     margin-right: \${props => props.spaceBetween};
   }\`;
@@ -162,9 +158,9 @@ export default styled.span\`.namespace && {
     \${() => stringify('font-size', '12px')};
 
     color: pink;
-  }
 
     \${() => stringify('display', 'flex')};
+  }
 
     .namespace &&:hover {
       color: red;
