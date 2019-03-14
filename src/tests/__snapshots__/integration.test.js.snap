@@ -44,13 +44,13 @@ exports[`styled-components output for a style block with interpolated selectors 
   position: relative;
 }
 
-.c1 .namespace .c0 {
+.namespace .c0 .c1 {
   -webkit-transform: scale(90%);
   -ms-transform: scale(90%);
   transform: scale(90%);
 }
 
-.c2 .namespace + .c0,
+.namespace .c2 + .c0,
 .namespace .c0 + .sc-dnqmqq {
   margin-right: 12px;
 }
@@ -61,17 +61,14 @@ exports[`styled-components output for a style block with interpolated selectors 
 `;
 
 exports[`styled-components output for a style block with interpolations before and afer a selector 1`] = `
-.c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 .namespace .c0.c0 {
   background-color: red;
   font-size: 12px;
   color: pink;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .namespace .c0.c0:hover {
