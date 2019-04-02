@@ -10,6 +10,22 @@ exports[`styled-components output for a style block with && 1`] = `
 />
 `;
 
+exports[`styled-components output for a style block with a media query 1`] = `
+.namespace .c0 {
+  display: block;
+}
+
+@media only screen and (min-width:640px) {
+  .namespace .c0 {
+    display: inline-block;
+  }
+}
+
+<button
+  className="c0"
+/>
+`;
+
 exports[`styled-components output for a style block with a sibling selector 1`] = `
 .namespace .c1 {
   padding: 4px;

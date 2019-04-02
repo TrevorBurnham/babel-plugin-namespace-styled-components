@@ -42,6 +42,11 @@ pluginTester({
     },
 
     {
+      title: 'namespaces a style block with a media query',
+      fixture: path.join(__dirname, 'fixtures/mediaQuery.js'),
+    },
+
+    {
       title: 'does not namespace style blocks in helpers',
       fixture: path.join(__dirname, 'fixtures/helpers.js'),
       snapshot: false,

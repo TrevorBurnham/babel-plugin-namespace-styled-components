@@ -70,4 +70,9 @@ describe('styled-components output', () => {
     );
     expect(renderer.create(<Span />).toJSON()).toMatchSnapshot();
   });
+
+  test('for a style block with a media query', () => {
+    const Span = evalFixture(path.join(__dirname, 'fixtures/mediaQuery.js'));
+    expect(renderer.create(<Span />).toJSON()).toMatchSnapshot();
+  });
 });

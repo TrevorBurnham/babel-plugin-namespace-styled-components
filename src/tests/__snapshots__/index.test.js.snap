@@ -20,6 +20,37 @@ export default styled.input\`.namespace && {
 "
 `;
 
+exports[`namespace-styled-components namespaces a style block with a media query: namespaces a style block with a media query 1`] = `
+"
+import styled from 'styled-components';
+
+const ResponsiveButton = styled.button\`
+  display: block;
+
+  @media only screen and (min-width: 640px) {
+    display: inline-block;
+  }
+\`;
+
+export default ResponsiveButton;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+const ResponsiveButton = styled.button\`.namespace & { 
+  display: block;
+ }
+
+  @media only screen and (min-width: 640px) {.namespace & {
+    display: inline-block
+ }
+  }\`;
+
+export default ResponsiveButton;
+"
+`;
+
 exports[`namespace-styled-components namespaces a style block with a sibling selector: namespaces a style block with a sibling selector 1`] = `
 "
 import styled from 'styled-components';
