@@ -37,7 +37,8 @@ pluginTester({
     },
 
     {
-      title: 'namespaces a style block with interpolations before and after a declaration',
+      title:
+        'namespaces a style block with interpolations before and after a declaration',
       fixture: path.join(__dirname, 'fixtures/interpolationSandwich.js'),
     },
 
@@ -67,6 +68,13 @@ pluginTester({
       fixture: path.join(__dirname, 'fixtures/malformatted.js'),
       snapshot: false,
       error: /Unexpected '\/'/,
+    },
+
+    {
+      title: 'throws an error if a mixin uses &&',
+      fixture: path.join(__dirname, 'fixtures/invalidMixin.js'),
+      snapshot: false,
+      error: /`&&` selector in mixin will break when namespaced/,
     },
   ],
 });

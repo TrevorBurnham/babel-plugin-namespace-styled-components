@@ -2,10 +2,12 @@ import postcssNested from 'postcss-nested';
 import { loopWhile } from 'deasync';
 import * as t from 'babel-types';
 import {
+  isCSSHelper,
   isStyled,
   isPureHelper,
   isInjectGlobalHelper,
 } from 'babel-plugin-styled-components/lib/utils/detectors';
+import detectInvalidSelector from './detectInvalidSelector';
 import postcssSafeParser from './placeholderSafeParser';
 import postcssNamespace from './postcssNamespace';
 
@@ -28,6 +30,10 @@ const taggedTemplateVisitor = (path, state) => {
   if (replacementNodes.has(node)) return;
 
   // Ignore templates tagged with anything other than `styled(x)`
+  if (isCSSHelper(t)(tag, state)) {
+    detectInvalidSelector(path, state);
+    return;
+  }
   if (!isStyled(t)(tag, state)) return;
   if (isPureHelper(t)(tag, state)) return;
   if (isInjectGlobalHelper(t)(tag, state)) return;
