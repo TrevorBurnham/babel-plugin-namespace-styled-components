@@ -40,9 +40,9 @@ Now all `styled()` blocks will emit selectors that use that namespace.
 }
 ```
 
-## Known limitations
+## Compatibility with mixins
 
-If you use multiple ampersands (`&&`) in a selector in a mixin, that selector will not match anything. This is a fundamental problem with namespacing at build time: styled-components resolves `&` to
+If you use multiple ampersands (`&&`) in a selector in a mixin (that is, a style block inserted into a `styled()` template with `${}`), that selector will not match anything. This is a fundamental problem with namespacing at build time: styled-components resolves `&` to
 
 ```css
 .namespace .c0
@@ -54,7 +54,7 @@ which means that `&&` will resolve to
 .namespace .c0.namespace .c0
 ```
 
-Within a `styled()` block, `&&` is specially handled by this plugin to avoid this issue. But mixins, e.g. `css()` blocks, aren’t. It’s impossible to predict at build time what `&&` should resolve to from a mixin.
+When the plugin detects an invalid selector like this in a styled-components `css()` block, it’ll throw an error at build time. Be careful to wrap mixins in `css()` rather than using raw strings, which are ignored by the plugin and therefore potentially unsafe.
 
 ## Acknowledgments
 
