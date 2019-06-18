@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src -d lib --ignore src/tests",
+    "dev": "babel src -d lib --ignore src/tests --watch",
     "clean": "rimraf lib",
     "prepublish": "npm run clean && npm run build",
     "test": "jest"
