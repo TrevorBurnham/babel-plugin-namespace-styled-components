@@ -116,8 +116,39 @@ const taggedTemplateVisitor = (path, state) => {
   path.replaceWith(replacementNode);
 };
 
+const throwIfAfterStyledComponentsPlugin = plugins => {
+  let styledComponentsPluginIndex = -1;
+  let thisPluginIndex = -1;
+  plugins.forEach(([plugin], index) => {
+    if (plugin.key === 'styled-components') {
+      styledComponentsPluginIndex = index;
+    } else if (plugin.pre === pre) {
+      thisPluginIndex = index;
+    }
+  });
+  if (
+    styledComponentsPluginIndex !== -1 &&
+    styledComponentsPluginIndex < thisPluginIndex
+  ) {
+    throw new Error(
+      '`babel-plugin-namespace-styled-components` must be defined before the ' +
+        '`styled-components` plugin'
+    );
+  }
+};
+
+let isFirstVisit = true;
+
+const pre = state => {
+  if (isFirstVisit) {
+    throwIfAfterStyledComponentsPlugin(state.opts.plugins),
+      (isFirstVisit = false);
+  }
+};
+
 export default function() {
   return {
+    pre,
     visitor: {
       TaggedTemplateExpression: taggedTemplateVisitor,
     },
