@@ -116,8 +116,41 @@ const taggedTemplateVisitor = (path, state) => {
   path.replaceWith(replacementNode);
 };
 
+const throwIfAfterStyledComponentsPlugin = plugins => {
+  let styledComponentsPluginIndex = -1;
+  let styledComponentsPluginKey;
+  plugins.find(([plugin], index) => {
+    if (plugin.key.match(/^(babel-plugin-)?styled-components$/)) {
+      styledComponentsPluginIndex = index;
+      styledComponentsPluginKey = plugin.key;
+    } else if (plugin.pre === pre) {
+      if (
+        styledComponentsPluginIndex !== -1 &&
+        styledComponentsPluginIndex < index
+      ) {
+        throw new Error(
+          `"${plugin.key}" must come before "${styledComponentsPluginKey}" ` +
+            'in the Babel `plugins` list'
+        );
+      }
+      return true;
+    }
+    return false;
+  });
+};
+
+let isFirstVisit = true;
+
+const pre = state => {
+  if (isFirstVisit) {
+    throwIfAfterStyledComponentsPlugin(state.opts.plugins),
+      (isFirstVisit = false);
+  }
+};
+
 export default function() {
   return {
+    pre,
     visitor: {
       TaggedTemplateExpression: taggedTemplateVisitor,
     },
