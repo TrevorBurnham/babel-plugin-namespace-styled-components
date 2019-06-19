@@ -118,23 +118,25 @@ const taggedTemplateVisitor = (path, state) => {
 
 const throwIfAfterStyledComponentsPlugin = plugins => {
   let styledComponentsPluginIndex = -1;
-  let thisPluginIndex = -1;
-  plugins.forEach(([plugin], index) => {
-    if (plugin.key === 'styled-components') {
+  let styledComponentsPluginKey;
+  plugins.find(([plugin], index) => {
+    if (plugin.key.match(/^(babel-plugin-)?styled-components$/)) {
       styledComponentsPluginIndex = index;
+      styledComponentsPluginKey = plugin.key;
     } else if (plugin.pre === pre) {
-      thisPluginIndex = index;
+      if (
+        styledComponentsPluginIndex !== -1 &&
+        styledComponentsPluginIndex < index
+      ) {
+        throw new Error(
+          `"${plugin.key}" must come before "${styledComponentsPluginKey}" ` +
+            'in the Babel `plugins` list'
+        );
+      }
+      return true;
     }
+    return false;
   });
-  if (
-    styledComponentsPluginIndex !== -1 &&
-    styledComponentsPluginIndex < thisPluginIndex
-  ) {
-    throw new Error(
-      '`babel-plugin-namespace-styled-components` must be defined before the ' +
-        '`styled-components` plugin'
-    );
-  }
 };
 
 let isFirstVisit = true;
