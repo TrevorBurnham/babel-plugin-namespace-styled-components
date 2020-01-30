@@ -54,13 +54,12 @@ pluginTester({
     },
 
     {
-      title: 'throws an error if no namespace is defined',
+      title: 'does not modify any code if namespace is undefined',
       fixture: path.join(__dirname, 'fixtures/simple.js'),
       pluginOptions: {
         namespace: undefined,
       },
       snapshot: false,
-      error: /option `namespace` must be provided/,
     },
 
     {
@@ -73,6 +72,17 @@ pluginTester({
     {
       title: 'throws an error if a mixin uses &&',
       fixture: path.join(__dirname, 'fixtures/invalidMixin.js'),
+      snapshot: false,
+      error: /`&&` selector in mixin will break when namespaced/,
+    },
+
+    {
+      title:
+        'throws an error if a mixin uses && even if namespace is undefined',
+      fixture: path.join(__dirname, 'fixtures/invalidMixin.js'),
+      pluginOptions: {
+        namespace: undefined,
+      },
       snapshot: false,
       error: /`&&` selector in mixin will break when namespaced/,
     },
