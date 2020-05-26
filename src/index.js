@@ -120,7 +120,7 @@ const taggedTemplateVisitor = (path, state) => {
 const throwIfAfterStyledComponentsPlugin = plugins => {
   let styledComponentsPluginIndex = -1;
   let styledComponentsPluginKey;
-  plugins.find(([plugin], index) => {
+  plugins.find((plugin, index) => {
     if (plugin.key.match(/^(babel-plugin-)?styled-components$/)) {
       styledComponentsPluginIndex = index;
       styledComponentsPluginKey = plugin.key;
