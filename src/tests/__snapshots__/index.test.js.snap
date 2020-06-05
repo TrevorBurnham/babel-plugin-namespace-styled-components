@@ -1,5 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`namespace-styled-components does not modify any code if namespace is undefined: does not modify any code if namespace is undefined 1`] = `
+"
+import styled from 'styled-components';
+
+export default styled.div\`
+  background-color: \${props => props.backgroundColor};
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import styled from 'styled-components';
+
+export default styled.div\`
+  background-color: \${props => props.backgroundColor};
+\`;
+"
+`;
+
+exports[`namespace-styled-components does not namespace style blocks in helpers: does not namespace style blocks in helpers 1`] = `
+"
+import { createGlobalStyle, css, injectGlobal, keyframes } from 'styled-components';
+
+export const getBodyColorStyle = color => createGlobalStyle\`
+  body {
+    color: \${color};
+  }
+\`;
+
+export const injectBodyStyles = styles => {
+  injectGlobal\`
+    body {
+      \${styles};
+    }
+  \`;
+};
+
+export const Rotate = keyframes\`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+\`;
+
+export const Clearfix = css\`
+  &:after {
+    display: table;
+    content: '';
+    clear: 'both';
+  }
+\`;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+import { createGlobalStyle, css, injectGlobal, keyframes } from 'styled-components';
+
+export const getBodyColorStyle = color => createGlobalStyle\`
+  body {
+    color: \${color};
+  }
+\`;
+
+export const injectBodyStyles = styles => {
+  injectGlobal\`
+    body {
+      \${styles};
+    }
+  \`;
+};
+
+export const Rotate = keyframes\`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+\`;
+
+export const Clearfix = css\`
+  &:after {
+    display: table;
+    content: '';
+    clear: 'both';
+  }
+\`;
+"
+`;
+
 exports[`namespace-styled-components namespaces a style block with &&: namespaces a style block with && 1`] = `
 "
 import styled from 'styled-components';

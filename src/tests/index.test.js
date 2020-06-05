@@ -50,7 +50,6 @@ pluginTester({
     {
       title: 'does not namespace style blocks in helpers',
       fixture: path.join(__dirname, 'fixtures/helpers.js'),
-      snapshot: false,
     },
 
     {
@@ -59,7 +58,6 @@ pluginTester({
       pluginOptions: {
         namespace: undefined,
       },
-      snapshot: false,
     },
 
     {

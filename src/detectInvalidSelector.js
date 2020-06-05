@@ -1,4 +1,3 @@
-import { loopWhile } from 'deasync';
 import postcssInvalidSelector from './postcssInvalidSelector';
 import postcssSafeParser from './placeholderSafeParser';
 
@@ -14,22 +13,11 @@ const detectInvalidSelector = path => {
     )
     .join('');
 
-  let postcssInvalidSelectorResult;
   postcssInvalidSelector
     .process(`& { ${originalStyleString} }`, {
       from: undefined,
       parser: postcssSafeParser,
-    })
-    .then(() => {
-      postcssInvalidSelectorResult = 0;
-    })
-    .catch(err => {
-      postcssInvalidSelectorResult = err;
-    });
-
-  loopWhile(() => postcssInvalidSelectorResult == null);
-  if (postcssInvalidSelectorResult instanceof Error)
-    throw postcssInvalidSelectorResult;
+    }).css
 };
 
 export default detectInvalidSelector;
